@@ -3,6 +3,7 @@ import {
   Columns2,
   Grid2X2,
   Image as ImageIcon,
+  Info as InfoIcon,
   Trash2,
   Upload,
 } from "lucide-react";
@@ -19,6 +20,7 @@ type Props = {
   onViewModeChange: (mode: ViewMode) => void;
   onImport: (event: ChangeEvent<HTMLInputElement>) => void;
   onClear: () => void;
+  onAbout: () => void;
 };
 
 export default function AppHeader({
@@ -28,6 +30,7 @@ export default function AppHeader({
   onViewModeChange,
   onImport,
   onClear,
+  onAbout,
 }: Props) {
   const { t } = useI18n();
 
@@ -113,6 +116,9 @@ export default function AppHeader({
         </button>
 
         <LanguageSwitch />
+        <button type="button" className="about-button" onClick={onAbout} title={t("aboutTitle")} aria-label={t("aboutTitle")}>
+          <InfoIcon size={18} />
+        </button>
       </div>
     </header>
   );

@@ -28,6 +28,7 @@ describe("AppHeader view modes", () => {
           onViewModeChange={onViewModeChange}
           onImport={vi.fn()}
           onClear={vi.fn()}
+          onAbout={vi.fn()}
         />
       </I18nProvider>,
     );

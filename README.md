@@ -159,3 +159,7 @@ npm run smoke:packaged
 ```
 
 生成的 DMG、ZIP、校验文件和安装说明位于本地 `release` 目录。安装说明见 [MACOS_INSTALL.txt](./MACOS_INSTALL.txt)，远端 Mac 的构建与检查步骤见 [MACOS_TESTING.md](./MACOS_TESTING.md)。
+
+## 开源许可
+
+本项目采用 [MIT License](./LICENSE) 开源。你可以在保留版权声明和许可声明的前提下使用、复制、修改和分发本软件。

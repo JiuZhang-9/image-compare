@@ -17,6 +17,7 @@ import { useI18n } from "./useI18n";
 import "./App.css";
 import MultiCompareView from "./components/MultiCompareView";
 import ABCompareView from "./components/ABCompareView";
+import AboutModal from "./components/AboutModal";
 import type { Theme, ViewMode } from "./types";
 import {
   getViewerKeyboardAction,
@@ -65,6 +66,7 @@ function App() {
     dismissImportNotice,
   } = imageLibrary;
   const [viewMode, setViewMode] = useState<ViewMode>("single");
+  const [showAbout, setShowAbout] = useState(false);
   const { t } = useI18n();
   const [zoom, setZoom] = useState(100);
   const [rotation, setRotation] = useState(0);
@@ -451,7 +453,10 @@ function App() {
         onViewModeChange={setViewMode}
         onImport={handleImport}
         onClear={handleClear}
+        onAbout={() => setShowAbout(true)}
       />
+
+      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
 
       <ImportNotice
         message={importNotice}
