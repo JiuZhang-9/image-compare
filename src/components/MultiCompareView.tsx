@@ -123,6 +123,8 @@ function MultiCompareView({
       return;
     }
 
+    const wheelRoot = root;
+
     function handleWheel(event: globalThis.WheelEvent) {
       const target = event.target;
 
@@ -134,13 +136,7 @@ function MultiCompareView({
         ".multi-compare-image-area",
       );
 
-      if (!imageArea || !root?.contains(imageArea)) {
-        return;
-      }
-
-      const imageId = imageArea.dataset.imageId;
-
-      if (!imageId) {
+      if (imageArea && !wheelRoot.contains(imageArea)) {
         return;
       }
 
@@ -155,16 +151,26 @@ function MultiCompareView({
         return;
       }
 
+      if (isLocalZoom && !imageArea) {
+        return;
+      }
+
+      const imageId = imageArea?.dataset.imageId;
+
+      if (isLocalZoom && !imageId) {
+        return;
+      }
+
       event.preventDefault();
 
       const zoomStep = event.deltaY < 0 ? 10 : -10;
-      const areaRect = imageArea.getBoundingClientRect();
+      const areaRect = (imageArea ?? wheelRoot).getBoundingClientRect();
 
       const pointerX = event.clientX - (areaRect.left + areaRect.width / 2);
 
       const pointerY = event.clientY - (areaRect.top + areaRect.height / 2);
 
-      if (isLocalZoom) {
+      if (isLocalZoom && imageId) {
         setLocalTransforms((currentTransforms) => {
           const current = currentTransforms[imageId] ?? DEFAULT_TRANSFORM;
 
@@ -194,12 +200,12 @@ function MultiCompareView({
       });
     }
 
-    root.addEventListener("wheel", handleWheel, {
+    wheelRoot.addEventListener("wheel", handleWheel, {
       passive: false,
     });
 
     return () => {
-      root.removeEventListener("wheel", handleWheel);
+      wheelRoot.removeEventListener("wheel", handleWheel);
     };
   }, []);
 

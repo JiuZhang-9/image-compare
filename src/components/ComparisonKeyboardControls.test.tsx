@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
@@ -200,5 +200,40 @@ describe("comparison keyboard controls", () => {
     for (const image of screen.getAllByRole("img")) {
       expect(image.style.transform).toContain("rotate(0deg)");
     }
+  });
+
+  it("zooms all images with Ctrl + wheel across the multi-image canvas", () => {
+    render(
+      <I18nProvider>
+        <MultiCompareHarness />
+      </I18nProvider>,
+    );
+
+    const globalZoom = screen.getByRole("button", {
+      name: /Synchronized zoom level/,
+    });
+    const shell = document.querySelector<HTMLElement>(".multi-compare-shell");
+    const grid = document.querySelector<HTMLElement>(".multi-compare-view");
+
+    expect(shell).not.toBeNull();
+    expect(grid).not.toBeNull();
+
+    fireEvent.wheel(shell!, {
+      deltaY: -100,
+      ctrlKey: true,
+      clientX: 10,
+      clientY: 10,
+    });
+
+    expect(globalZoom.textContent).toContain("110%");
+
+    fireEvent.wheel(grid!, {
+      deltaY: 100,
+      ctrlKey: true,
+      clientX: 10,
+      clientY: 10,
+    });
+
+    expect(globalZoom.textContent).toContain("100%");
   });
 });
