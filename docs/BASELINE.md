@@ -35,15 +35,16 @@
 
 ## 验证结果
 
-| 项                           | 结果                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------ |
-| `npm run check`              | 通过（format / lint / strict tsc / UI 规范 / 97 单测 / build）           |
-| `npm run e2e`                | 4/4 通过（导入、视图切换、主题/语言、Electron shell）                    |
-| `npm run coverage`           | 行 62.07% / 语句 62.33% / 分支 56.28% / 函数 62.92%                      |
-| `npm run smoke:electron`     | 通过                                                                     |
-| `npm run ui:shots`           | 9 张状态截图（deep/light × compare/single/grid + about + components ×2） |
-| `npm run electron:build:win` | 通过（本次输出到 `D:\Temp\image-compare-release`，见下方说明）           |
-| `npm run smoke:packaged`     | 通过（`IMAGE_COMPARE_RELEASE_DIR=D:/Temp/image-compare-release`）        |
+| 项                           | 结果                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| `npm run check`              | 通过（format / lint / strict tsc / UI 规范 / 97 单测 / build）                                    |
+| `npm run e2e`                | 4/4 通过（导入、视图切换、主题/语言、Electron shell）                                             |
+| `npm run coverage`           | 行 62.07% / 语句 62.33% / 分支 56.28% / 函数 62.92%                                               |
+| `npm run smoke:electron`     | 通过                                                                                              |
+| `npm run ui:shots`           | 9 张状态截图（deep/light × compare/single/grid + about + components ×2）                          |
+| `npm run electron:build:win` | 通过（本次输出到 `D:\Temp\image-compare-release`，见下方说明）                                    |
+| `npm run smoke:packaged`     | 通过（`IMAGE_COMPARE_RELEASE_DIR=D:/Temp/image-compare-release`）                                 |
+| GitHub Actions CI            | 全绿：Ubuntu verify（3 e2e + 1 skip）；Windows smoke（4 e2e + Electron smoke）；run `44935722492` |
 
 Windows 产物：`Image-Compare-1.3.0-team.0-Windows-x64-Setup.exe`（约 109 MB）。
 
@@ -51,7 +52,7 @@ Windows 产物：`Image-Compare-1.3.0-team.0-Windows-x64-Setup.exe`（约 109 MB
 
 - GitHub Electron 二进制下载在本机停滞：使用 `npm run deps`（注入 `ELECTRON_MIRROR=https://npmmirror.com/mirrors/electron/`）。
 - Playwright Chromium 1255 在本机下载失败：本地 e2e 使用系统 Edge；CI 使用 `playwright install chromium`。
-- 本机工作区的 `release/` 目录被外部句柄锁定，electron-builder 无法把 `win-unpacked.tmp` 重命名；改用 `-c.directories.output=D:/Temp/image-compare-release` 验证，产物启动正常。CI 干净环境不受影响。
+- 本机工作区的 `release/` 目录被外部句柄锁定（清理后仍复现），electron-builder 无法把 `win-unpacked.tmp` 重命名；改用 `-c.directories.output=D:/Temp/image-compare-release` 验证，产物启动正常。CI 干净 runner 不受影响（Windows job 已通过）。
 - `npm audit` 的 20 个漏洞全部来自 devDependencies（electron-builder 工具链）；`npm audit --omit=dev` 为 0。
 - 版本注入：Vite `define` 的 `__APP_VERSION__` 在 Vitest 中未替换，AboutModal 回退到 `0.0.0-dev`，测试用正则匹配。
 
