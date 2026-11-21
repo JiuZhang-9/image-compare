@@ -4,13 +4,16 @@
 
 ## 标识
 
-| 项       | 值                                                   |
-| -------- | ---------------------------------------------------- |
-| 版本     | `1.3.0-team.0`                                       |
-| Git tag  | `v1.3.0-team.0`（annotated）                         |
-| 分支     | `main`                                               |
-| 基线上游 | `baseline-1.2.1` / `ZiDongLai/image-compare@49644e0` |
-| 冻结日期 | 2026-11-22                                           |
+| 项       | 值                                                                     |
+| -------- | ---------------------------------------------------------------------- |
+| 版本     | `1.3.0-team.0`                                                         |
+| Git tag  | `v1.3.0-team.0`（annotated）                                           |
+| Commit   | `1b2d5d8`（`chore: establish engineering, design, and test baseline`） |
+| 分支     | `main`                                                                 |
+| 仓库     | `JiuZhang-9/image-compare`（private）                                  |
+| Release  | https://github.com/JiuZhang-9/image-compare/releases/tag/v1.3.0-team.0 |
+| 基线上游 | `baseline-1.2.1` / `ZiDongLai/image-compare@49644e0`                   |
+| 冻结日期 | 2026-11-22                                                             |
 
 ## 工具链
 
@@ -39,8 +42,8 @@
 | `npm run coverage`           | 行 62.07% / 语句 62.33% / 分支 56.28% / 函数 62.92%                      |
 | `npm run smoke:electron`     | 通过                                                                     |
 | `npm run ui:shots`           | 9 张状态截图（deep/light × compare/single/grid + about + components ×2） |
-| `npm run electron:build:win` | 通过（本次输出到 `D:\Temp\image-compare-release`，见下方说明） |
-| `npm run smoke:packaged`     | 通过（`IMAGE_COMPARE_RELEASE_DIR=D:/Temp/image-compare-release`） |
+| `npm run electron:build:win` | 通过（本次输出到 `D:\Temp\image-compare-release`，见下方说明）           |
+| `npm run smoke:packaged`     | 通过（`IMAGE_COMPARE_RELEASE_DIR=D:/Temp/image-compare-release`）        |
 
 Windows 产物：`Image-Compare-1.3.0-team.0-Windows-x64-Setup.exe`（约 109 MB）。
 
