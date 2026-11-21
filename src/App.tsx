@@ -5,34 +5,27 @@ import type {
   MouseEvent as ReactMouseEvent,
   WheelEvent as ReactWheelEvent,
 } from "react";
-import AppHeader from "./components/AppHeader";
-import EmptyState from "./components/EmptyState";
-import ImageSidebar from "./components/ImageSidebar";
-import ImportNotice from "./components/ImportNotice";
-import StatusBar from "./components/StatusBar";
-import SingleImageView from "./components/SingleImageView";
-import ViewerToolbar from "./components/ViewerToolbar";
-import { useImageLibrary } from "./hooks/useImageLibrary";
+import AppHeader from "@/components/AppHeader";
+import EmptyState from "@/components/EmptyState";
+import ImageSidebar from "@/components/ImageSidebar";
+import ImportNotice from "@/components/ImportNotice";
+import StatusBar from "@/components/StatusBar";
+import SingleImageView from "@/components/SingleImageView";
+import ViewerToolbar from "@/components/ViewerToolbar";
+import { useImageLibrary } from "@/hooks/useImageLibrary";
 import { useI18n } from "./useI18n";
 import "./App.css";
-import MultiCompareView from "./components/MultiCompareView";
-import ABCompareView from "./components/ABCompareView";
-import AboutModal from "./components/AboutModal";
-import type { Theme, ViewMode } from "./types";
-import {
-  getViewerKeyboardAction,
-  isTextEditingTarget,
-} from "./utils/viewerKeyboard";
+import MultiCompareView from "@/components/MultiCompareView";
+import ABCompareView from "@/components/ABCompareView";
+import AboutModal from "@/components/AboutModal";
+import type { Theme, ViewMode } from "@/types";
+import { getViewerKeyboardAction, isTextEditingTarget } from "@/utils/viewerKeyboard";
 
 function App() {
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("image-compare-theme");
 
-    if (
-      savedTheme === "dark" ||
-      savedTheme === "gray" ||
-      savedTheme === "light"
-    ) {
+    if (savedTheme === "dark" || savedTheme === "gray" || savedTheme === "light") {
       return savedTheme;
     }
 
@@ -79,10 +72,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(
-      "image-compare-show-file-names",
-      String(showFileNames),
-    );
+    localStorage.setItem("image-compare-show-file-names", String(showFileNames));
   }, [showFileNames]);
 
   /*
@@ -119,13 +109,16 @@ function App() {
 
   const [isPanning, setIsPanning] = useState(false);
 
-  const selectImageWithReset = useCallback((imageId: string) => {
-    selectImage(imageId);
-    setZoom(100);
-    setRotation(0);
-    setPan({ x: 0, y: 0 });
-    setIsPanning(false);
-  }, [selectImage]);
+  const selectImageWithReset = useCallback(
+    (imageId: string) => {
+      selectImage(imageId);
+      setZoom(100);
+      setRotation(0);
+      setPan({ x: 0, y: 0 });
+      setIsPanning(false);
+    },
+    [selectImage],
+  );
 
   const panStartRef = useRef({
     mouseX: 0,
@@ -185,17 +178,14 @@ function App() {
       const currentIndex = images.findIndex((image) => image.id === selectedId);
 
       if (action === "select-previous") {
-        const previousIndex =
-          currentIndex <= 0 ? images.length - 1 : currentIndex - 1;
+        const previousIndex = currentIndex <= 0 ? images.length - 1 : currentIndex - 1;
 
         selectImageWithReset(images[previousIndex].id);
         return;
       }
 
       const nextIndex =
-        currentIndex < 0 || currentIndex >= images.length - 1
-          ? 0
-          : currentIndex + 1;
+        currentIndex < 0 || currentIndex >= images.length - 1 ? 0 : currentIndex + 1;
 
       selectImageWithReset(images[nextIndex].id);
     }
@@ -300,11 +290,9 @@ function App() {
       zoomViewport instanceof HTMLElement ? zoomViewport : event.currentTarget
     ).getBoundingClientRect();
 
-    const pointerX =
-      event.clientX - (viewportRect.left + viewportRect.width / 2);
+    const pointerX = event.clientX - (viewportRect.left + viewportRect.width / 2);
 
-    const pointerY =
-      event.clientY - (viewportRect.top + viewportRect.height / 2);
+    const pointerY = event.clientY - (viewportRect.top + viewportRect.height / 2);
 
     const scaleRatio = nextZoom / zoom;
 
@@ -458,10 +446,7 @@ function App() {
 
       {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
 
-      <ImportNotice
-        message={importNotice}
-        onDismiss={dismissImportNotice}
-      />
+      <ImportNotice message={importNotice} onDismiss={dismissImportNotice} />
 
       <div className="workspace">
         <ImageSidebar

@@ -3,7 +3,7 @@ name: Build macOS test package
 on:
   push:
     branches:
-      - codex/macos-version
+      - main
     tags:
       - "v*"
   workflow_dispatch:
@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 24.15.0
           cache: npm
 
       - name: Install dependencies

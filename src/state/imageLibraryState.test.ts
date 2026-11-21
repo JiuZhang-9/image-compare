@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { LocalImage } from "../types";
+import type { LocalImage } from "@/types";
 import {
   getCompareAImage,
   getCompareBImage,
@@ -133,11 +133,7 @@ describe("imageLibraryReducer", () => {
       imageIds: ["one", "two", "three"],
     });
 
-    expect(restored.images.map(({ id }) => id)).toEqual([
-      "one",
-      "two",
-      "three",
-    ]);
+    expect(restored.images.map(({ id }) => id)).toEqual(["one", "two", "three"]);
     expect(restored.selectedId).toBe(initial.selectedId);
     expect(restored.compareAId).toBe(initial.compareAId);
     expect(restored.compareBId).toBe(initial.compareBId);
@@ -160,12 +156,12 @@ describe("imageLibraryReducer", () => {
       images: [image("one")],
     });
 
-    expect(
-      imageLibraryReducer(initial, { type: "select", imageId: "missing" }),
-    ).toBe(initial);
-    expect(
-      imageLibraryReducer(initial, { type: "delete", imageId: "missing" }),
-    ).toBe(initial);
+    expect(imageLibraryReducer(initial, { type: "select", imageId: "missing" })).toBe(
+      initial,
+    );
+    expect(imageLibraryReducer(initial, { type: "delete", imageId: "missing" })).toBe(
+      initial,
+    );
     expect(
       imageLibraryReducer(initial, {
         type: "set-thumbnail",
@@ -173,12 +169,12 @@ describe("imageLibraryReducer", () => {
         thumbnailUrl: "blob:missing",
       }),
     ).toBe(initial);
-    expect(
-      imageLibraryReducer(initial, { type: "set-a", imageId: "missing" }),
-    ).toBe(initial);
-    expect(
-      imageLibraryReducer(initial, { type: "set-b", imageId: "missing" }),
-    ).toBe(initial);
+    expect(imageLibraryReducer(initial, { type: "set-a", imageId: "missing" })).toBe(
+      initial,
+    );
+    expect(imageLibraryReducer(initial, { type: "set-b", imageId: "missing" })).toBe(
+      initial,
+    );
     expect(
       imageLibraryReducer(initial, {
         type: "reorder",

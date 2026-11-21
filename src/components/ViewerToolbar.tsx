@@ -6,8 +6,8 @@ import {
   ZoomIn,
   ZoomOut,
 } from "lucide-react";
-import type { ViewMode } from "../types";
-import { useI18n } from "../useI18n";
+import type { ViewMode } from "@/types";
+import { useI18n } from "@/useI18n";
 import FileNameToggle from "./FileNameToggle";
 
 type Props = {
@@ -58,9 +58,7 @@ export default function ViewerToolbar({
 
       <div
         className={
-          viewMode === "single"
-            ? "zoom-controls"
-            : "zoom-controls grid-hidden-controls"
+          viewMode === "single" ? "zoom-controls" : "zoom-controls grid-hidden-controls"
         }
       >
         <button
@@ -94,10 +92,7 @@ export default function ViewerToolbar({
         </button>
 
         {viewMode === "single" && (
-          <FileNameToggle
-            showFileNames={showFileNames}
-            onToggle={onToggleFileNames}
-          />
+          <FileNameToggle showFileNames={showFileNames} onToggle={onToggleFileNames} />
         )}
 
         {viewMode === "single" && (

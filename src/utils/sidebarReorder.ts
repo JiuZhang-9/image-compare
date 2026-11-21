@@ -1,8 +1,4 @@
-export function getDragAutoScrollAmount(
-  pointerY: number,
-  top: number,
-  bottom: number,
-) {
+export function getDragAutoScrollAmount(pointerY: number, top: number, bottom: number) {
   const height = bottom - top;
 
   if (height <= 0) {

@@ -5,6 +5,9 @@ const path = require("path");
 
 const electronPath = require("electron");
 const projectDirectory = path.resolve(__dirname, "..");
+const releaseDirectory = process.env.IMAGE_COMPARE_RELEASE_DIR
+  ? path.resolve(process.env.IMAGE_COMPARE_RELEASE_DIR)
+  : path.join(projectDirectory, "release");
 const usePackagedApplication = process.argv.includes("--packaged");
 
 function findPackagedExecutable() {
@@ -12,8 +15,7 @@ function findPackagedExecutable() {
     process.platform === "darwin"
       ? ["mac-arm64", "mac-universal", "mac"].map((directory) =>
           path.join(
-            projectDirectory,
-            "release",
+            releaseDirectory,
             directory,
             "图片对比工具.app",
             "Contents",
@@ -22,22 +24,8 @@ function findPackagedExecutable() {
           ),
         )
       : process.platform === "win32"
-        ? [
-            path.join(
-              projectDirectory,
-              "release",
-              "win-unpacked",
-              "图片对比工具.exe",
-            ),
-          ]
-        : [
-            path.join(
-              projectDirectory,
-              "release",
-              "linux-unpacked",
-              "图片对比工具",
-            ),
-          ];
+        ? [path.join(releaseDirectory, "win-unpacked", "图片对比工具.exe")]
+        : [path.join(releaseDirectory, "linux-unpacked", "图片对比工具")];
 
   return candidates.find((candidate) => fs.existsSync(candidate));
 }
@@ -49,9 +37,7 @@ if (usePackagedApplication && !packagedExecutable) {
   process.exit(1);
 }
 
-const profileDirectory = fs.mkdtempSync(
-  path.join(os.tmpdir(), "image-compare-smoke-"),
-);
+const profileDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "image-compare-smoke-"));
 
 const child = spawn(
   usePackagedApplication ? packagedExecutable : electronPath,
@@ -59,12 +45,12 @@ const child = spawn(
     ? [`--user-data-dir=${profileDirectory}`]
     : [`--user-data-dir=${profileDirectory}`, projectDirectory],
   {
-  cwd: projectDirectory,
-  env: {
-    ...process.env,
-    IMAGE_COMPARE_SMOKE_TEST: "1",
-  },
-  stdio: ["ignore", "pipe", "pipe"],
+    cwd: projectDirectory,
+    env: {
+      ...process.env,
+      IMAGE_COMPARE_SMOKE_TEST: "1",
+    },
+    stdio: ["ignore", "pipe", "pipe"],
     windowsHide: process.platform === "win32",
   },
 );
@@ -96,11 +82,7 @@ child.on("close", (code) => {
   clearTimeout(timeout);
   fs.rmSync(profileDirectory, { recursive: true, force: true });
 
-  if (
-    timedOut ||
-    code !== 0 ||
-    !output.includes("IMAGE_COMPARE_ELECTRON_SMOKE_OK")
-  ) {
+  if (timedOut || code !== 0 || !output.includes("IMAGE_COMPARE_ELECTRON_SMOKE_OK")) {
     console.error(
       timedOut
         ? "Electron smoke test timed out."

@@ -1,5 +1,5 @@
 import { Images } from "lucide-react";
-import { useI18n } from "../useI18n";
+import { useI18n } from "@/useI18n";
 
 export default function EmptyState() {
   const { t } = useI18n();

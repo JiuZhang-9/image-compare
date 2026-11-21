@@ -1,0 +1,125 @@
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./tokens.css";
+
+/* 令牌到 Tailwind 工具的映射。新增颜色/尺寸只改这里和 tokens.css。 */
+@theme inline {
+  --font-sans: var(--app-font-sans);
+
+  --color-app-bg: var(--app-bg);
+  --color-app-surface: var(--app-surface);
+  --color-app-surface-raised: var(--app-surface-raised);
+  --color-app-surface-hover: var(--app-surface-hover);
+  --color-app-surface-active: var(--app-surface-active);
+  --color-app-border: var(--app-border);
+  --color-app-border-strong: var(--app-border-strong);
+  --color-app-text: var(--app-text);
+  --color-app-muted: var(--app-text-muted);
+  --color-app-subtle: var(--app-text-subtle);
+  --color-app-accent: var(--app-accent);
+  --color-app-accent-hover: var(--app-accent-hover);
+  --color-app-accent-contrast: var(--app-accent-contrast);
+  --color-app-danger: var(--app-danger);
+  --color-app-success: var(--app-success);
+  --color-app-warning: var(--app-warning);
+  --color-app-canvas: var(--app-canvas);
+  --color-app-overlay: var(--app-overlay);
+  --color-app-overlay-text: var(--app-overlay-text);
+  --color-role-a: var(--app-role-a);
+  --color-role-b: var(--app-role-b);
+  --color-role-a-contrast: var(--app-role-a-contrast);
+  --color-role-b-contrast: var(--app-role-b-contrast);
+
+  --text-ui-xs: 0.625rem;
+  --text-ui-sm: 0.6875rem;
+  --text-ui: 0.75rem;
+  --text-body: 0.8125rem;
+  --text-title: 1rem;
+  --text-display: 1.25rem;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+
+  --shadow-panel: var(--app-shadow-panel);
+  --shadow-popover: var(--app-shadow-popover);
+
+  --ease-standard: var(--app-ease);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--app-bg);
+    color: var(--app-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    appearance: none;
+    color: inherit;
+    font: inherit;
+  }
+
+  button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  input,
+  select,
+  textarea {
+    background: none;
+    border: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--app-focus);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .checkerboard {
+    background-color: var(--app-canvas);
+    background-image:
+      linear-gradient(45deg, var(--app-checker-a) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--app-checker-a) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--app-checker-a) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--app-checker-a) 75%);
+    background-position:
+      0 0,
+      0 8px,
+      8px -8px,
+      -8px 0;
+    background-size: 16px 16px;
+  }
+
+  .ui-scrollbar {
+    scrollbar-color: var(--app-border-strong) transparent;
+    scrollbar-width: thin;
+  }
+}

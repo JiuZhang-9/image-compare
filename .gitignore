@@ -52,3 +52,9 @@ desktop.ini
 tmp/
 temp/
 *.tmp
+# tooling output
+artifacts/
+coverage/
+playwright-report/
+test-results/
+blob-report/

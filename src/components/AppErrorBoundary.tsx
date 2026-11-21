@@ -38,7 +38,10 @@ export default class AppErrorBoundary extends Component<Props, State> {
           <div className="fatal-error-card">
             <h1>应用遇到问题</h1>
             <p>界面未能正常显示。你的原始图片不会被修改。</p>
-            <p lang="en">The interface could not be displayed. Your original images were not modified.</p>
+            <p lang="en">
+              The interface could not be displayed. Your original images were not
+              modified.
+            </p>
             <button type="button" onClick={this.handleReload}>
               重新加载 / Reload
             </button>

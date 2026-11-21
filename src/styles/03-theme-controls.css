@@ -461,11 +461,8 @@
 }
 
 /* 下拉菜单打开时 */
-:root[data-theme="gray"]
-  .topbar-actions
-  .theme-dropdown-trigger[aria-expanded="true"],
-.theme-dropdown[data-theme="gray"]
-  .theme-dropdown-trigger[aria-expanded="true"] {
+:root[data-theme="gray"] .topbar-actions .theme-dropdown-trigger[aria-expanded="true"],
+.theme-dropdown[data-theme="gray"] .theme-dropdown-trigger[aria-expanded="true"] {
   color: #ffffff !important;
   background: #40444b !important;
   border-color: #5b91e8 !important;

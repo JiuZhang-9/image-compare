@@ -24,10 +24,7 @@ describe("selectImportableImages", () => {
 
   it("rejects unsupported and oversized files", () => {
     const result = selectImportableImages(
-      [
-        { type: "text/plain", size: 10 },
-        image(MAX_IMAGE_FILE_BYTES + 1),
-      ],
+      [{ type: "text/plain", size: 10 }, image(MAX_IMAGE_FILE_BYTES + 1)],
       0,
     );
 

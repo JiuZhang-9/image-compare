@@ -7,9 +7,9 @@ import {
   Trash2,
   Upload,
 } from "lucide-react";
-import logoImage from "../assets/logo.png";
-import type { Theme, ViewMode } from "../types";
-import { useI18n } from "../useI18n";
+import logoImage from "@/assets/logo.png";
+import type { Theme, ViewMode } from "@/types";
+import { useI18n } from "@/useI18n";
 import LanguageSwitch from "./LanguageSwitch";
 import ThemeSwitcher from "./ThemeSwitcher";
 
@@ -96,12 +96,7 @@ export default function AppHeader({
           <Upload size={18} />
           <span>{t("importImages")}</span>
 
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={onImport}
-          />
+          <input type="file" accept="image/*" multiple onChange={onImport} />
         </label>
 
         <button
@@ -116,7 +111,13 @@ export default function AppHeader({
         </button>
 
         <LanguageSwitch />
-        <button type="button" className="about-button" onClick={onAbout} title={t("aboutTitle")} aria-label={t("aboutTitle")}>
+        <button
+          type="button"
+          className="about-button"
+          onClick={onAbout}
+          title={t("aboutTitle")}
+          aria-label={t("aboutTitle")}
+        >
           <InfoIcon size={18} />
         </button>
       </div>

@@ -1,4 +1,4 @@
-import type { LocalImage } from "../types";
+import type { LocalImage } from "@/types";
 
 export type ImageLibraryState = {
   images: LocalImage[];
@@ -27,17 +27,13 @@ export const INITIAL_IMAGE_LIBRARY_STATE: ImageLibraryState = {
 
 export function getSelectedImage(state: ImageLibraryState) {
   return (
-    state.images.find((image) => image.id === state.selectedId) ??
-    state.images[0] ??
-    null
+    state.images.find((image) => image.id === state.selectedId) ?? state.images[0] ?? null
   );
 }
 
 export function getCompareAImage(state: ImageLibraryState) {
   return (
-    state.images.find((image) => image.id === state.compareAId) ??
-    state.images[0] ??
-    null
+    state.images.find((image) => image.id === state.compareAId) ?? state.images[0] ?? null
   );
 }
 
@@ -47,11 +43,7 @@ export function getCompareBImage(state: ImageLibraryState) {
     (image) => image.id === state.compareBId && image.id !== imageA?.id,
   );
 
-  return (
-    savedImage ??
-    state.images.find((image) => image.id !== imageA?.id) ??
-    null
-  );
+  return savedImage ?? state.images.find((image) => image.id !== imageA?.id) ?? null;
 }
 
 export function imageLibraryReducer(
@@ -72,9 +64,7 @@ export function imageLibraryReducer(
       };
 
     case "set-thumbnail": {
-      const imageIndex = state.images.findIndex(
-        (image) => image.id === action.imageId,
-      );
+      const imageIndex = state.images.findIndex((image) => image.id === action.imageId);
 
       if (imageIndex < 0) {
         return state;
@@ -106,9 +96,7 @@ export function imageLibraryReducer(
         ...state,
         compareAId: action.imageId,
         compareBId:
-          action.imageId === currentB?.id
-            ? currentA?.id ?? null
-            : state.compareBId,
+          action.imageId === currentB?.id ? (currentA?.id ?? null) : state.compareBId,
       };
     }
 
@@ -123,29 +111,20 @@ export function imageLibraryReducer(
       return {
         ...state,
         compareAId:
-          action.imageId === currentA?.id
-            ? currentB?.id ?? null
-            : state.compareAId,
+          action.imageId === currentA?.id ? (currentB?.id ?? null) : state.compareAId,
         compareBId: action.imageId,
       };
     }
 
     case "reorder": {
-      const fromIndex = state.images.findIndex(
-        (image) => image.id === action.imageId,
-      );
+      const fromIndex = state.images.findIndex((image) => image.id === action.imageId);
 
       if (fromIndex < 0) {
         return state;
       }
 
-      const insertionIndex = Math.min(
-        state.images.length,
-        Math.max(0, action.toIndex),
-      );
-      const nextImages = state.images.filter(
-        (image) => image.id !== action.imageId,
-      );
+      const insertionIndex = Math.min(state.images.length, Math.max(0, action.toIndex));
+      const nextImages = state.images.filter((image) => image.id !== action.imageId);
       const adjustedIndex =
         fromIndex < insertionIndex ? insertionIndex - 1 : insertionIndex;
 
@@ -166,9 +145,7 @@ export function imageLibraryReducer(
         return state;
       }
 
-      const imagesById = new Map(
-        state.images.map((image) => [image.id, image] as const),
-      );
+      const imagesById = new Map(state.images.map((image) => [image.id, image] as const));
       const images = action.imageIds.map((imageId) => imagesById.get(imageId));
 
       if (images.some((image) => !image)) {
@@ -197,15 +174,14 @@ export function imageLibraryReducer(
       if (imageB?.id === action.imageId) {
         const nextA =
           images.find((image) => image.id === compareAId) ?? images[0] ?? null;
-        compareBId =
-          images.find((image) => image.id !== nextA?.id)?.id ?? null;
+        compareBId = images.find((image) => image.id !== nextA?.id)?.id ?? null;
       }
 
       return {
         images,
         selectedId:
           selectedImage?.id === action.imageId
-            ? images[0]?.id ?? null
+            ? (images[0]?.id ?? null)
             : state.selectedId,
         compareAId,
         compareBId,

@@ -1,5 +1,5 @@
-import type { ViewMode } from "../types";
-import { useI18n } from "../useI18n";
+import type { ViewMode } from "@/types";
+import { useI18n } from "@/useI18n";
 
 type Props = {
   imageCount: number;

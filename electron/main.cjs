@@ -2,8 +2,9 @@ const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
 
 const isSmokeTest = process.env.IMAGE_COMPARE_SMOKE_TEST === "1";
+const isE2ETest = process.env.IMAGE_COMPARE_E2E === "1";
 
-if (isSmokeTest || process.env.IMAGE_COMPARE_DISABLE_GPU === "1") {
+if (isSmokeTest || isE2ETest || process.env.IMAGE_COMPARE_DISABLE_GPU === "1") {
   app.disableHardwareAcceleration();
 }
 
@@ -111,7 +112,7 @@ function createWindow() {
     });
   }
 
-  if (app.isPackaged || isSmokeTest) {
+  if (app.isPackaged || isSmokeTest || isE2ETest) {
     mainWindow.loadFile(path.join(__dirname, "../dist-renderer/index.html"));
   } else {
     mainWindow.loadURL("http://127.0.0.1:5173");

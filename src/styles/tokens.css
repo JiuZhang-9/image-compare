@@ -1,0 +1,73 @@
+/* 设计令牌唯一来源。组件中禁止出现裸色值。 */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --app-font-sans:
+    Inter, "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  --app-bg: #0f1115;
+  --app-surface: #171a1f;
+  --app-surface-raised: #1d2128;
+  --app-surface-hover: #232831;
+  --app-surface-active: #2a3039;
+  --app-border: #262a31;
+  --app-border-strong: #343a44;
+  --app-text: #e8eaed;
+  --app-text-muted: #9aa3af;
+  --app-text-subtle: #7b8593;
+  --app-accent: #3b82f6;
+  --app-accent-hover: #60a5fa;
+  --app-accent-contrast: #ffffff;
+  --app-role-a: #7c6cf0;
+  --app-role-b: #1f9bb5;
+  --app-role-a-contrast: #0b0918;
+  --app-role-b-contrast: #071116;
+  --app-danger: #ef4444;
+  --app-success: #22c55e;
+  --app-warning: #f59e0b;
+  --app-canvas: #0b0d10;
+  --app-checker-a: #14171c;
+  --app-checker-b: #191d23;
+  --app-overlay: rgb(0 0 0 / 55%);
+  --app-overlay-text: #ffffff;
+  --app-focus: #3b82f6;
+  --app-shadow-panel: 0 1px 0 rgb(255 255 255 / 4%), 0 8px 24px rgb(0 0 0 / 28%);
+  --app-shadow-popover: 0 12px 32px rgb(0 0 0 / 45%);
+  --app-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --app-bg: #f4f6f8;
+  --app-surface: #ffffff;
+  --app-surface-raised: #ffffff;
+  --app-surface-hover: #eef2f6;
+  --app-surface-active: #e4e9ef;
+  --app-border: #dfe4ea;
+  --app-border-strong: #c9d1da;
+  --app-text: #1a1f26;
+  --app-text-muted: #5b6572;
+  --app-text-subtle: #6b7480;
+  --app-accent: #2563eb;
+  --app-accent-hover: #1d4ed8;
+  --app-accent-contrast: #ffffff;
+  --app-role-a: #5b4fd6;
+  --app-role-b: #0f7f99;
+  --app-role-a-contrast: #ffffff;
+  --app-role-b-contrast: #ffffff;
+  --app-danger: #dc2626;
+  --app-success: #16a34a;
+  --app-warning: #b45309;
+  --app-canvas: #e9edf2;
+  --app-checker-a: #e2e7ed;
+  --app-checker-b: #eef2f6;
+  --app-overlay: rgb(15 17 21 / 55%);
+  --app-overlay-text: #ffffff;
+  --app-focus: #2563eb;
+  --app-shadow-panel: 0 1px 0 rgb(255 255 255 / 60%), 0 8px 24px rgb(15 23 42 / 8%);
+  --app-shadow-popover: 0 12px 32px rgb(15 23 42 / 14%);
+}

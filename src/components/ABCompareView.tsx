@@ -7,28 +7,18 @@ import {
   type SetStateAction,
 } from "react";
 import { createPortal } from "react-dom";
-import {
-  Columns2,
-  Layers3,
-  Maximize,
-  Minus,
-  Plus,
-  RotateCw,
-} from "lucide-react";
-import { useI18n } from "../useI18n";
-import type { LocalImage } from "../types";
-import { hasSameDisplayImage } from "../utils/imageDisplay";
+import { Columns2, Layers3, Maximize, Minus, Plus, RotateCw } from "lucide-react";
+import { useI18n } from "@/useI18n";
+import type { LocalImage } from "@/types";
+import { hasSameDisplayImage } from "@/utils/imageDisplay";
 import {
   clampZoom,
   composeTransforms,
   DEFAULT_TRANSFORM,
   type TransformState,
   zoomAtPoint,
-} from "../utils/imageTransforms";
-import {
-  getTransformKeyboardAction,
-  isTextEditingTarget,
-} from "../utils/viewerKeyboard";
+} from "@/utils/imageTransforms";
+import { getTransformKeyboardAction, isTextEditingTarget } from "@/utils/viewerKeyboard";
 import FileNameToggle from "./FileNameToggle";
 import FileNameOverlay from "./FileNameOverlay";
 
@@ -90,19 +80,15 @@ function ABCompareView({
   const [globalTransform, setGlobalTransform] =
     useState<TransformState>(DEFAULT_TRANSFORM);
 
-  const [transformAState, setTransformAState] = useState<ImageTransformState>(
-    () => ({
-      imageId: imageA?.id ?? null,
-      transform: DEFAULT_TRANSFORM,
-    }),
-  );
+  const [transformAState, setTransformAState] = useState<ImageTransformState>(() => ({
+    imageId: imageA?.id ?? null,
+    transform: DEFAULT_TRANSFORM,
+  }));
 
-  const [transformBState, setTransformBState] = useState<ImageTransformState>(
-    () => ({
-      imageId: imageB?.id ?? null,
-      transform: DEFAULT_TRANSFORM,
-    }),
-  );
+  const [transformBState, setTransformBState] = useState<ImageTransformState>(() => ({
+    imageId: imageB?.id ?? null,
+    transform: DEFAULT_TRANSFORM,
+  }));
 
   const transformA =
     transformAState.imageId === (imageA?.id ?? null)
@@ -120,14 +106,11 @@ function ABCompareView({
 
       setTransformAState((currentState) => {
         const currentTransform =
-          currentState.imageId === imageId
-            ? currentState.transform
-            : DEFAULT_TRANSFORM;
+          currentState.imageId === imageId ? currentState.transform : DEFAULT_TRANSFORM;
 
         return {
           imageId,
-          transform:
-            typeof action === "function" ? action(currentTransform) : action,
+          transform: typeof action === "function" ? action(currentTransform) : action,
         };
       });
     },
@@ -140,14 +123,11 @@ function ABCompareView({
 
       setTransformBState((currentState) => {
         const currentTransform =
-          currentState.imageId === imageId
-            ? currentState.transform
-            : DEFAULT_TRANSFORM;
+          currentState.imageId === imageId ? currentState.transform : DEFAULT_TRANSFORM;
 
         return {
           imageId,
-          transform:
-            typeof action === "function" ? action(currentTransform) : action,
+          transform: typeof action === "function" ? action(currentTransform) : action,
         };
       });
     },
@@ -247,11 +227,9 @@ function ABCompareView({
 
       const viewportRect = viewport.getBoundingClientRect();
 
-      const pointerX =
-        event.clientX - (viewportRect.left + viewportRect.width / 2);
+      const pointerX = event.clientX - (viewportRect.left + viewportRect.width / 2);
 
-      const pointerY =
-        event.clientY - (viewportRect.top + viewportRect.height / 2);
+      const pointerY = event.clientY - (viewportRect.top + viewportRect.height / 2);
 
       updateOperationTransform((current) => {
         const nextZoom = clampZoom(current.zoom + zoomStep);
@@ -605,10 +583,7 @@ function ABCompareView({
             >
               <Plus size={15} />
             </button>
-            <FileNameToggle
-              showFileNames={showFileNames}
-              onToggle={onToggleFileNames}
-            />
+            <FileNameToggle showFileNames={showFileNames} onToggle={onToggleFileNames} />
             <button
               type="button"
               className="transform-action-button transform-reset-button"
@@ -672,9 +647,7 @@ function ABCompareView({
                   onError={() => onImageLoadError?.(imageA.id)}
                   style={transformStyleA}
                 />
-                {showFileNames && (
-                  <FileNameOverlay fileName={imageA.name} />
-                )}
+                {showFileNames && <FileNameOverlay fileName={imageA.name} />}
               </div>
             </div>
 
@@ -698,9 +671,7 @@ function ABCompareView({
                   onError={() => onImageLoadError?.(imageB.id)}
                   style={transformStyleB}
                 />
-                {showFileNames && (
-                  <FileNameOverlay fileName={imageB.name} />
-                )}
+                {showFileNames && <FileNameOverlay fileName={imageB.name} />}
               </div>
             </div>
           </div>

@@ -33,10 +33,7 @@ describe("image thumbnails", () => {
       { url: "blob:original", thumbnailUrl: "blob:thumbnail" },
       revoke,
     );
-    revokeImageObjectUrls(
-      { url: "blob:shared", thumbnailUrl: "blob:shared" },
-      revoke,
-    );
+    revokeImageObjectUrls({ url: "blob:shared", thumbnailUrl: "blob:shared" }, revoke);
 
     expect(revoke.mock.calls).toEqual([
       ["blob:thumbnail"],
@@ -51,12 +48,15 @@ describe("image thumbnails", () => {
     const thumbnail = new Blob(["thumbnail"], { type: "image/webp" });
     const bitmap = { width: 4000, height: 2000, close } as ImageBitmap;
 
-    vi.stubGlobal("createImageBitmap", vi.fn(async () => bitmap));
+    vi.stubGlobal(
+      "createImageBitmap",
+      vi.fn(async () => bitmap),
+    );
     vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({
       drawImage,
     } as unknown as CanvasRenderingContext2D);
-    vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation(
-      (callback) => callback(thumbnail),
+    vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation((callback) =>
+      callback(thumbnail),
     );
 
     const result = await createImageThumbnail(

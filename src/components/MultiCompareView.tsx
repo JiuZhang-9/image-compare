@@ -1,33 +1,24 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-  Grid3X3,
-  Maximize,
-  Minus,
-  Plus,
-  RotateCw,
-} from "lucide-react";
-import { useI18n } from "../useI18n";
-import { useFrameScheduler } from "../hooks/useFrameScheduler";
-import type { LocalImage } from "../types";
-import { haveSameDisplayImages } from "../utils/imageDisplay";
+import { Grid3X3, Maximize, Minus, Plus, RotateCw } from "lucide-react";
+import { useI18n } from "@/useI18n";
+import { useFrameScheduler } from "@/hooks/useFrameScheduler";
+import type { LocalImage } from "@/types";
+import { haveSameDisplayImages } from "@/utils/imageDisplay";
 import {
   clampZoom,
   composeTransforms,
   DEFAULT_TRANSFORM,
   type TransformState,
   zoomAtPoint,
-} from "../utils/imageTransforms";
-import {
-  getTransformKeyboardAction,
-  isTextEditingTarget,
-} from "../utils/viewerKeyboard";
+} from "@/utils/imageTransforms";
+import { getTransformKeyboardAction, isTextEditingTarget } from "@/utils/viewerKeyboard";
 import {
   getMultiGridCardBasis,
   getMultiGridCardHeight,
   getPreferredMultiGridColumns,
   getResponsiveMultiGridColumns,
-} from "../utils/multiGridLayout";
+} from "@/utils/multiGridLayout";
 import FileNameToggle from "./FileNameToggle";
 import FileNameOverlay from "./FileNameOverlay";
 
@@ -70,9 +61,9 @@ function MultiCompareView({
   const [globalTransform, setGlobalTransform] =
     useState<TransformState>(DEFAULT_TRANSFORM);
 
-  const [localTransforms, setLocalTransforms] = useState<
-    Record<string, TransformState>
-  >({});
+  const [localTransforms, setLocalTransforms] = useState<Record<string, TransformState>>(
+    {},
+  );
 
   const [dragging, setDragging] = useState<{
     imageId: string;
@@ -132,9 +123,7 @@ function MultiCompareView({
         return;
       }
 
-      const imageArea = target.closest<HTMLElement>(
-        ".multi-compare-image-area",
-      );
+      const imageArea = target.closest<HTMLElement>(".multi-compare-image-area");
 
       if (imageArea && !wheelRoot.contains(imageArea)) {
         return;
@@ -355,10 +344,7 @@ function MultiCompareView({
     }));
   }
 
-  function handlePointerDown(
-    event: React.PointerEvent<HTMLDivElement>,
-    imageId: string,
-  ) {
+  function handlePointerDown(event: React.PointerEvent<HTMLDivElement>, imageId: string) {
     if (event.button !== 0) {
       return;
     }
@@ -421,10 +407,7 @@ function MultiCompareView({
     setDragging(null);
   }
 
-  function handleDoubleClick(
-    event: React.MouseEvent<HTMLDivElement>,
-    imageId: string,
-  ) {
+  function handleDoubleClick(event: React.MouseEvent<HTMLDivElement>, imageId: string) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -452,10 +435,7 @@ function MultiCompareView({
       : null;
 
   const preferredColumns = getPreferredMultiGridColumns(images.length);
-  const columns = getResponsiveMultiGridColumns(
-    images.length,
-    containerWidth,
-  );
+  const columns = getResponsiveMultiGridColumns(images.length, containerWidth);
   const rows = Math.max(1, Math.ceil(images.length / columns));
   const gridStyle = {
     "--multi-grid-card-basis": getMultiGridCardBasis(columns),
@@ -498,10 +478,7 @@ function MultiCompareView({
               <Plus size={16} />
             </button>
 
-            <FileNameToggle
-              showFileNames={showFileNames}
-              onToggle={onToggleFileNames}
-            />
+            <FileNameToggle showFileNames={showFileNames} onToggle={onToggleFileNames} />
 
             <button
               type="button"
@@ -550,17 +527,14 @@ function MultiCompareView({
               local.y !== 0 ||
               local.rotation !== 0;
 
-            const isLocalDragging =
-              dragging?.imageId === image.id && dragging.local;
+            const isLocalDragging = dragging?.imageId === image.id && dragging.local;
 
             return (
               <div
                 className={[
                   "grid-card",
                   "multi-compare-card",
-                  hasLocalAdjustment || isLocalDragging
-                    ? "is-local-adjusting"
-                    : "",
+                  hasLocalAdjustment || isLocalDragging ? "is-local-adjusting" : "",
                 ]
                   .filter(Boolean)
                   .join(" ")}
@@ -598,10 +572,7 @@ function MultiCompareView({
                   </span>
 
                   {showFileNames && (
-                    <FileNameOverlay
-                      fileName={image.name}
-                      className="grid-card-name"
-                    />
+                    <FileNameOverlay fileName={image.name} className="grid-card-name" />
                   )}
                 </div>
               </div>

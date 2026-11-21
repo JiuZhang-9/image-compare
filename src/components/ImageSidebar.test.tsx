@@ -3,8 +3,8 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "../i18n";
-import type { LocalImage } from "../types";
+import { I18nProvider } from "@/i18n";
+import type { LocalImage } from "@/types";
 import ImageSidebar from "./ImageSidebar";
 
 const images: LocalImage[] = [
@@ -66,12 +66,8 @@ describe("ImageSidebar", () => {
     const user = userEvent.setup();
     const props = renderSidebar();
 
-    await user.click(
-      screen.getByRole("button", { name: "Set as image A: second.png" }),
-    );
-    await user.click(
-      screen.getByRole("button", { name: "Delete: second.png" }),
-    );
+    await user.click(screen.getByRole("button", { name: "Set as image A: second.png" }));
+    await user.click(screen.getByRole("button", { name: "Delete: second.png" }));
 
     expect(props.onSetAsA).toHaveBeenCalledWith("two");
     expect(props.onDelete).toHaveBeenCalledWith("two");
@@ -109,22 +105,16 @@ describe("ImageSidebar", () => {
 
     await user.type(filter, "second");
 
-    expect(
-      screen.queryByRole("button", { name: "Select image: first.png" }),
-    ).toBeNull();
+    expect(screen.queryByRole("button", { name: "Select image: first.png" })).toBeNull();
     expect(
       screen.getByRole("button", { name: "Select image: second.png" }),
     ).toBeDefined();
     expect(screen.getByText("1/2")).toBeDefined();
 
-    await user.click(
-      screen.getByRole("button", { name: "Locate current image" }),
-    );
+    await user.click(screen.getByRole("button", { name: "Locate current image" }));
 
     expect((filter as HTMLInputElement).value).toBe("");
-    expect(
-      screen.getByRole("button", { name: "Select image: first.png" }),
-    ).toBeDefined();
+    expect(screen.getByRole("button", { name: "Select image: first.png" })).toBeDefined();
     expect(screen.getByRole("status").textContent).toBe(
       "Current image located: first.png, position 1",
     );
@@ -151,23 +141,17 @@ describe("ImageSidebar", () => {
     await user.click(screen.getByRole("button", { name: "Undo reorder" }));
 
     expect(props.onUndoReorder).toHaveBeenCalledOnce();
-    expect(screen.getByRole("status").textContent).toBe(
-      "Last reorder undone",
-    );
+    expect(screen.getByRole("status").textContent).toBe("Last reorder undone");
   });
 
   it("restores the original import order when images were rearranged", async () => {
     const user = userEvent.setup();
     const props = renderSidebar({ canRestoreImportOrder: true });
 
-    await user.click(
-      screen.getByRole("button", { name: "Restore import order" }),
-    );
+    await user.click(screen.getByRole("button", { name: "Restore import order" }));
 
     expect(props.onRestoreImportOrder).toHaveBeenCalledOnce();
-    expect(screen.getByRole("status").textContent).toBe(
-      "Original import order restored",
-    );
+    expect(screen.getByRole("status").textContent).toBe("Original import order restored");
   });
 
   it("reorders an image with the keyboard-accessible drag handle", () => {
@@ -214,5 +198,4 @@ describe("ImageSidebar", () => {
 
     expect(props.onReorder).toHaveBeenCalledWith("one", 2);
   });
-
 });

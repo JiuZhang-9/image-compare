@@ -3,8 +3,8 @@
 import { act, cleanup, renderHook } from "@testing-library/react";
 import type { PropsWithChildren } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "../i18n";
-import { MAX_IMAGE_FILE_BYTES } from "../utils/imageImport";
+import { I18nProvider } from "@/i18n";
+import { MAX_IMAGE_FILE_BYTES } from "@/utils/imageImport";
 import { useImageLibrary } from "./useImageLibrary";
 
 const createObjectURL = vi.fn<(file: Blob) => string>();
@@ -76,9 +76,7 @@ describe("useImageLibrary object URL lifecycle", () => {
       result.current.handleImageLoadError(brokenId);
     });
 
-    expect(result.current.images.map((image) => image.name)).toEqual([
-      "healthy.png",
-    ]);
+    expect(result.current.images.map((image) => image.name)).toEqual(["healthy.png"]);
     expect(result.current.importNotice).toBe(
       "The image could not be decoded and was removed",
     );
@@ -86,9 +84,7 @@ describe("useImageLibrary object URL lifecycle", () => {
   });
 
   it("releases every remaining object URL when the library unmounts", () => {
-    createObjectURL
-      .mockReturnValueOnce("blob:first")
-      .mockReturnValueOnce("blob:second");
+    createObjectURL.mockReturnValueOnce("blob:first").mockReturnValueOnce("blob:second");
     const { result, unmount } = renderHook(() => useImageLibrary(), {
       wrapper: Wrapper,
     });
@@ -157,8 +153,7 @@ describe("useImageLibrary object URL lifecycle", () => {
     });
     const files = Array.from(
       { length: 100 },
-      (_, index) =>
-        new File(["image"], `stress-${index}.png`, { type: "image/png" }),
+      (_, index) => new File(["image"], `stress-${index}.png`, { type: "image/png" }),
     );
 
     act(() => {

@@ -1,4 +1,4 @@
-import { useI18n } from "../useI18n";
+import { useI18n } from "@/useI18n";
 
 type Props = {
   message: string | null;

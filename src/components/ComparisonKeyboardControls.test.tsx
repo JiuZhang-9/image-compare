@@ -4,8 +4,8 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { I18nProvider } from "../i18n";
-import type { LocalImage } from "../types";
+import { I18nProvider } from "@/i18n";
+import type { LocalImage } from "@/types";
 import ABCompareView from "./ABCompareView";
 import MultiCompareView from "./MultiCompareView";
 
@@ -75,14 +75,10 @@ describe("comparison keyboard controls", () => {
     });
 
     expect(
-      screen.getByRole("button", { name: "Side by Side" }).getAttribute(
-        "aria-pressed",
-      ),
+      screen.getByRole("button", { name: "Side by Side" }).getAttribute("aria-pressed"),
     ).toBe("true");
     expect(
-      screen.getByRole("button", { name: "Overlay" }).getAttribute(
-        "aria-pressed",
-      ),
+      screen.getByRole("button", { name: "Overlay" }).getAttribute("aria-pressed"),
     ).toBe("false");
     expect(
       screen
@@ -94,9 +90,9 @@ describe("comparison keyboard controls", () => {
     await user.click(screen.getByRole("button", { name: "Hide file names" }));
     expect(document.querySelector(".viewer-file-name")).toBeNull();
     expect(
-      screen.getByRole("button", { name: "Show file names" }).getAttribute(
-        "aria-pressed",
-      ),
+      screen
+        .getByRole("button", { name: "Show file names" })
+        .getAttribute("aria-pressed"),
     ).toBe("false");
 
     await user.keyboard("+");
@@ -123,9 +119,7 @@ describe("comparison keyboard controls", () => {
 
     await user.click(screen.getByRole("button", { name: "Adjust A" }));
     expect(
-      screen.getByRole("button", { name: "Adjust A" }).getAttribute(
-        "aria-pressed",
-      ),
+      screen.getByRole("button", { name: "Adjust A" }).getAttribute("aria-pressed"),
     ).toBe("true");
     await user.keyboard("r");
     expect(screen.getByRole("img", { name: "first.png" }).style.transform).toContain(
@@ -155,17 +149,14 @@ describe("comparison keyboard controls", () => {
     expect(grid?.style.getPropertyValue("--multi-grid-card-basis")).toContain(
       "33.333333%",
     );
-    expect(grid?.style.getPropertyValue("--multi-grid-card-height")).toContain(
-      "100%",
-    );
+    expect(grid?.style.getPropertyValue("--multi-grid-card-height")).toContain("100%");
 
     for (const image of screen.getAllByRole("img")) {
       expect(image.getAttribute("loading")).toBe("lazy");
       expect(image.getAttribute("decoding")).toBe("async");
       expect(
-        image
-          .closest(".multi-compare-image-area")
-          ?.querySelector(".grid-card-name")?.textContent,
+        image.closest(".multi-compare-image-area")?.querySelector(".grid-card-name")
+          ?.textContent,
       ).toBe(image.getAttribute("alt"));
     }
 
@@ -176,9 +167,9 @@ describe("comparison keyboard controls", () => {
     expect(fileNameToggle.getAttribute("aria-pressed")).toBe("true");
     await user.click(fileNameToggle);
     expect(
-      screen.getByRole("button", { name: "Show file names" }).getAttribute(
-        "aria-pressed",
-      ),
+      screen
+        .getByRole("button", { name: "Show file names" })
+        .getAttribute("aria-pressed"),
     ).toBe("false");
     expect(document.querySelector(".grid-card-name")).toBeNull();
 

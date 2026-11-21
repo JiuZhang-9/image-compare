@@ -45,9 +45,7 @@ export function getMultiGridCardBasis(
 ) {
   const safeColumns = Math.max(1, Math.floor(columns));
   const percentage = formatCssNumber(100 / safeColumns);
-  const gapShare = formatCssNumber(
-    (gap * Math.max(0, safeColumns - 1)) / safeColumns,
-  );
+  const gapShare = formatCssNumber((gap * Math.max(0, safeColumns - 1)) / safeColumns);
 
   return `min(100%, max(${minCardWidth}px, calc(${percentage}% - ${gapShare}px)))`;
 }
@@ -80,9 +78,7 @@ export function getMultiGridCardHeight(
 ) {
   const safeRows = Math.max(1, Math.floor(rows));
   const percentage = formatCssNumber(100 / safeRows);
-  const gapShare = formatCssNumber(
-    (gap * Math.max(0, safeRows - 1)) / safeRows,
-  );
+  const gapShare = formatCssNumber((gap * Math.max(0, safeRows - 1)) / safeRows);
 
   return `min(100%, max(${minCardHeight}px, calc(${percentage}% - ${gapShare}px)))`;
 }

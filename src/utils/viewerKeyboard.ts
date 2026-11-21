@@ -1,4 +1,4 @@
-import type { ViewMode } from "../types";
+import type { ViewMode } from "@/types";
 
 export type ViewerKeyboardAction =
   | "stop-panning"
@@ -67,9 +67,7 @@ export function getViewerKeyboardAction({
   return null;
 }
 
-export function getTransformKeyboardAction(
-  key: string,
-): TransformKeyboardAction | null {
+export function getTransformKeyboardAction(key: string): TransformKeyboardAction | null {
   if (key === "+" || key === "=") {
     return "zoom-in";
   }

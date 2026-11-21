@@ -7,21 +7,21 @@ import {
   INITIAL_IMAGE_LIBRARY_STATE,
   type ImageLibraryAction,
   type ImageLibraryState,
-} from "../state/imageLibraryState";
-import type { LocalImage } from "../types";
-import { useI18n } from "../useI18n";
+} from "@/state/imageLibraryState";
+import type { LocalImage } from "@/types";
+import { useI18n } from "@/useI18n";
 import {
   MAX_IMAGE_COUNT,
   MAX_IMAGE_FILE_MIB,
   MAX_TOTAL_IMAGE_MIB,
   selectImportableImages,
-} from "../utils/imageImport";
+} from "@/utils/imageImport";
 import {
   AsyncTaskQueue,
   createImageThumbnail,
   revokeImageObjectUrls,
   THUMBNAIL_CONCURRENCY,
-} from "../utils/imageThumbnail";
+} from "@/utils/imageThumbnail";
 
 function createImageId(file: File, index: number) {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${index}-${file.name}`;
@@ -30,17 +30,13 @@ function createImageId(file: File, index: number) {
 export function useImageLibrary() {
   const { t } = useI18n();
   const stateRef = useRef<ImageLibraryState>(INITIAL_IMAGE_LIBRARY_STATE);
-  const [state, setState] = useState<ImageLibraryState>(
-    INITIAL_IMAGE_LIBRARY_STATE,
-  );
+  const [state, setState] = useState<ImageLibraryState>(INITIAL_IMAGE_LIBRARY_STATE);
   const [importNotice, setImportNotice] = useState<string | null>(null);
   const previousOrderRef = useRef<string[] | null>(null);
   const importOrderRef = useRef<string[]>([]);
   const [canUndoReorder, setCanUndoReorder] = useState(false);
   const [canRestoreImportOrder, setCanRestoreImportOrder] = useState(false);
-  const [thumbnailQueue] = useState(
-    () => new AsyncTaskQueue(THUMBNAIL_CONCURRENCY),
-  );
+  const [thumbnailQueue] = useState(() => new AsyncTaskQueue(THUMBNAIL_CONCURRENCY));
 
   const updateCanRestoreImportOrder = useCallback(() => {
     const currentOrder = stateRef.current.images.map((image) => image.id);
@@ -80,9 +76,7 @@ export function useImageLibrary() {
       const notices: string[] = [];
 
       if (selection.rejectedType > 0) {
-        notices.push(
-          `${t("unsupportedImagesSkipped")}: ${selection.rejectedType}`,
-        );
+        notices.push(`${t("unsupportedImagesSkipped")}: ${selection.rejectedType}`);
       }
 
       if (selection.rejectedSize > 0) {
@@ -96,7 +90,6 @@ export function useImageLibrary() {
           `${t("imageCountLimitReached")} (${MAX_IMAGE_COUNT}): ${selection.rejectedCount}`,
         );
       }
-
 
       if (selection.rejectedTotalSize > 0) {
         notices.push(
@@ -176,12 +169,8 @@ export function useImageLibrary() {
         return;
       }
 
-      const insertionIndex = Math.min(
-        currentImages.length,
-        Math.max(0, toIndex),
-      );
-      const finalIndex =
-        fromIndex < insertionIndex ? insertionIndex - 1 : insertionIndex;
+      const insertionIndex = Math.min(currentImages.length, Math.max(0, toIndex));
+      const finalIndex = fromIndex < insertionIndex ? insertionIndex - 1 : insertionIndex;
 
       if (finalIndex === fromIndex) {
         return;
@@ -222,9 +211,7 @@ export function useImageLibrary() {
 
   const deleteImage = useCallback(
     (imageId: string) => {
-      const target = stateRef.current.images.find(
-        (image) => image.id === imageId,
-      );
+      const target = stateRef.current.images.find((image) => image.id === imageId);
 
       if (!target) {
         return;

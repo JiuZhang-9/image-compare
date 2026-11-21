@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  getTransformKeyboardAction,
-  getViewerKeyboardAction,
-} from "./viewerKeyboard";
+import { getTransformKeyboardAction, getViewerKeyboardAction } from "./viewerKeyboard";
 
 describe("getTransformKeyboardAction", () => {
   it.each([
@@ -34,23 +31,17 @@ describe("getViewerKeyboardAction", () => {
     ["ArrowLeft", "select-previous"],
     ["ArrowRight", "select-next"],
   ] as const)("maps %s in single-image mode", (key, expectedAction) => {
-    expect(
-      getViewerKeyboardAction({ key, viewMode: "single", imageCount: 2 }),
-    ).toBe(expectedAction);
+    expect(getViewerKeyboardAction({ key, viewMode: "single", imageCount: 2 })).toBe(
+      expectedAction,
+    );
   });
 
   it.each(["compare", "grid"] as const)(
     "does not mutate the hidden single-image transform in %s mode",
     (viewMode) => {
-      expect(
-        getViewerKeyboardAction({ key: "+", viewMode, imageCount: 2 }),
-      ).toBeNull();
-      expect(
-        getViewerKeyboardAction({ key: "0", viewMode, imageCount: 2 }),
-      ).toBeNull();
-      expect(
-        getViewerKeyboardAction({ key: "r", viewMode, imageCount: 2 }),
-      ).toBeNull();
+      expect(getViewerKeyboardAction({ key: "+", viewMode, imageCount: 2 })).toBeNull();
+      expect(getViewerKeyboardAction({ key: "0", viewMode, imageCount: 2 })).toBeNull();
+      expect(getViewerKeyboardAction({ key: "r", viewMode, imageCount: 2 })).toBeNull();
     },
   );
 

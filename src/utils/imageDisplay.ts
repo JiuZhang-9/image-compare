@@ -1,9 +1,6 @@
-import type { LocalImage } from "../types";
+import type { LocalImage } from "@/types";
 
-export function hasSameDisplayImage(
-  left: LocalImage | null,
-  right: LocalImage | null,
-) {
+export function hasSameDisplayImage(left: LocalImage | null, right: LocalImage | null) {
   if (left === right) {
     return true;
   }

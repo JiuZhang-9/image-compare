@@ -1,165 +1,108 @@
 # 图片对比工具（Image Compare）
 
-一款完全在本地运行的轻量桌面图片查看与对比工具。
+完全本地运行的桌面图片查看与 A/B / 多图对比工具。基于 [ZiDongLai/image-compare](https://github.com/ZiDongLai/image-compare)（MIT）的团队 fork，当前处于 `1.3.0-team.0` 准备期基线。
 
-当前稳定版本：**1.2.0**
+> 私有开发仓库。上游代码版权与 MIT 声明见 [`LICENSE`](./LICENSE)、[`NOTICE.md`](./NOTICE.md)。
 
-项目专注于单图查看、两图差异对比和少量多图同步观察，不提供批量修图、格式转换或复杂工作流处理功能。
+## 功能
 
-## 下载与系统支持
+### 单图
 
-安装包请前往 [GitHub Releases](https://github.com/lzy4107932-commits/image-compare/releases) 下载。
+- 自适应窗口，缩放 / 拖动 / 旋转 / 复位
+- 方向键切换图片
+- 文件名显示开关
 
-| 系统 | 安装包 | 支持范围 |
-| --- | --- | --- |
-| Windows | `.exe` | Windows 10/11 x64 |
-| macOS | `.dmg` | Apple Silicon M1/M2/M3/M4，ARM64 |
+### A/B 对比
 
-macOS 版没有付费 Apple Developer ID 签名和 Apple 公证。首次打开时，请进入“系统设置”→“隐私与安全性”，找到“图片对比工具”被阻止的提示并点击“仍要打开”（部分系统版本可能显示“仍要安装”）。安装包同时附带 `MACOS_INSTALL.txt` 完整说明，不需要全局关闭 Gatekeeper。
+- 左右并排 + 重叠滑块
+- A/B 同步或独立校准
+- 缩放、平移、旋转、复位
 
-## 主要功能
+### 多图
 
-### 单图模式
+- 3 张横排、4 张 2×2，更多图自动排列
+- 全局同步变换，`Alt` 单独校准一张
 
-- 图片自适应窗口显示
-- 缩放、拖动、顺时针旋转与一键复位
-- 使用方向键切换图片
-- 可在画布底部显示或隐藏完整文件名
+### 管理
 
-### A/B 对比模式
+- 按钮 / 拖拽导入；拖拽与键盘排序；撤销、恢复导入顺序
+- 文件名筛选、定位当前图片
+- 中文 / 英文；深色 / 浅色主题（gray 主题将在 UI 迁移时移除）
+- 导入上限：100 张、单张 50 MiB、总量 500 MiB
 
-- 左右并排和重叠滑块两种对比方式
-- 支持 A、B 同步调整或分别校准
-- 支持缩放、移动、旋转和复位
-- 图片文件名显示在各自展示区域底部
+## 快捷键
 
-### 多图模式
-
-- 根据图片数量自动选择紧凑排列方式
-- 3 张图片并排展示，4 张图片采用 2×2 布局
-- 支持全部图片同步缩放、移动和旋转
-- 使用 `Alt` 配合鼠标可单独校准一张图片
-
-### 图片管理与界面
-
-- 拖入图片或通过按钮导入
-- 左侧列表支持拖拽及键盘排序
-- 支持撤销排序、恢复最初导入顺序
-- 支持按文件名筛选并定位当前图片
-- 深色、灰色、浅色三种主题
-- 中文与英文界面
-- 常用操作支持键盘快捷键
-
-## 界面截图
-
-### 单图模式
-
-<img width="3070" height="1822" alt="image" src="https://github.com/user-attachments/assets/566a5c0e-e9ea-42f7-942d-da396a708030" />
-
-
-### A/B 对比模式
-
-<img width="3066" height="1824" alt="image" src="https://github.com/user-attachments/assets/8a6c6b70-32df-4b55-9168-9fcd74df405a" />
-<img width="3070" height="1828" alt="image" src="https://github.com/user-attachments/assets/95aca8a4-51c7-40eb-8a95-ff51b61a8e2d" />
-
-
-### 多图模式
-<img width="3070" height="1826" alt="image" src="https://github.com/user-attachments/assets/9a0193f9-005b-4053-8f94-2523e326814e" />
-
-## 快捷操作
-
-| 模式 | 操作 |
-| --- | --- |
-| 单图 | `←` / `→` 切图，`+` / `-` 缩放，`0` 复位，`R` 旋转 |
-| A/B | `+` / `-` 缩放当前对象，`0` 复位，`R` 旋转 |
-| 多图 | `+` / `-` 同步缩放，`0` 全部复位，`R` 全部旋转 |
+| 模式     | 操作                                                   |
+| -------- | ------------------------------------------------------ |
+| 单图     | `←` / `→` 切图，`+` / `-` 缩放，`0` 复位，`R` 旋转     |
+| A/B      | `+` / `-` 缩放当前对象，`0` 复位，`R` 旋转             |
+| 多图     | `+` / `-` 同步缩放，`0` 全部复位，`R` 全部旋转         |
 | 多图鼠标 | `Ctrl/Cmd + 滚轮` 同步缩放，`Alt + 滚轮/拖动` 调整单图 |
-| 图片列表 | `Ctrl/Cmd + F` 定位筛选框，`Esc` 清除筛选 |
+| 图片列表 | `Ctrl/Cmd + F` 定位筛选框，`Esc` 清除筛选              |
 
-## 隐私与安全
+## 隐私
 
-- 图片只通过本地对象 URL 加载，不会上传到网络。
-- 删除、清空图片或关闭应用时会释放临时图片资源。
-- 无法解码的图片会被单独移除，不影响其他图片继续使用。
-- 错误恢复界面不会显示图片内容、本地文件路径或技术堆栈。
-
-为避免误操作和过高的内存占用，当前设置了单张图片 50 MiB、总容量 500 MiB 和最多 100 张的安全上限；这些上限是保护措施，不代表软件定位为批量处理工具。
-
-## 1.2.0 更新内容
-
-- 新增 Apple Silicon macOS 版本，支持 M1、M2、M3、M4 ARM64 设备。
-- 新增 DMG 和 ZIP 构建、ICNS 图标及 macOS 原生应用菜单。
-- macOS 安装包采用免费的 ad-hoc 技术签名，并增加严格签名校验。
-- 增加 macOS 打包后启动测试及首次打开安全提示说明。
-- 保持 Windows 版本功能和构建流程不变。
-
-## 1.1.0 更新内容
-
-- 优化单图初始自适应显示与旋转后的尺寸计算。
-- 完善 A/B 和多图模式的缩放、旋转、复位及快捷键操作。
-- 优化 3 张、4 张及更多图片的展示排列和画布利用率。
-- 三种模式统一文件名显示位置与显示开关。
-- 新增图片拖拽排序、键盘排序、撤销及恢复导入顺序。
-- 新增文件名筛选、当前图片定位与操作反馈。
-- 优化大图缩略图、拖动刷新和临时资源释放。
-- 增加损坏图片隔离、全局错误恢复及 Windows 打包验证。
-- 完善自动化测试，目前包含 94 项测试。
-
-## 后续优化方向
-
-以下功能作为下一阶段的候选开发内容，目前尚未包含在 1.2.0 版本中：
-
-- [ ] 图片裁剪：支持框选裁剪区域，并确认或取消裁剪结果。
-- [ ] 图片标注：支持在图片上添加文字、箭头和基础图形标记。
-- [ ] 图片马赛克：支持用画笔遮挡图片中的敏感区域。
-
-后续实现时应继续采用本地处理，并提供撤销和另存为能力，避免直接覆盖原始图片。
+- 图片只在本地内存处理，不上传、无遥测、无网络请求。
+- 删除 / 清空 / 关闭时释放 object URL。
+- 无法解码的图片会被隔离，不影响其他图片。
+- 错误页不显示图片内容、本地路径或堆栈。
 
 ## 技术栈
 
-- Electron
-- React
-- TypeScript
-- Vite
-- Vitest 与 Testing Library
+| 层     | 选型                                            |
+| ------ | ----------------------------------------------- |
+| 运行时 | Electron 44（精确锁定）                         |
+| UI     | React 19 + TypeScript 6（strict）               |
+| 构建   | Vite 8 + electron-builder 26                    |
+| 新样式 | Tailwind CSS 4 + 设计令牌 + `src/ui` primitives |
+| 测试   | Vitest 5 + RTL；Playwright 1.65                 |
+| 质量   | oxlint + Prettier + GitHub Actions              |
+
+旧界面仍使用全局 CSS（5,700+ 行），正在按「Shell → Single → A/B → Multi」逐屏迁移到设计系统。当前设计系统与可交互原型见 `ui-kit.html`。
 
 ## 本地开发
 
-确保电脑已经安装 Node.js，然后执行：
+需要 **Node.js 24.15+**（`.nvmrc` 已锁定）与 npm 11.6。
 
 ```bash
-npm install
-npm run dev
+npm run deps     # npm ci + ELECTRON_MIRROR（本机直连 GitHub 会卡）
+npm run dev      # Vite + Electron
+npm run check    # format / lint / typecheck / UI 规范 / 单测 / build
+npm run e2e      # Playwright（浏览器 + Windows Electron shell）
+npm run ui       # http://127.0.0.1:5173/ui-kit.html 设计系统与原型
 ```
 
-## 检查与构建
+常用脚本：
 
-```bash
-# 代码检查、自动化测试和生产构建
-npm run check
+| 命令                         | 说明                                   |
+| ---------------------------- | -------------------------------------- |
+| `npm run dev:renderer`       | 只起 Vite（浏览器调试 / e2e）          |
+| `npm run check:all`          | `check` + e2e + Electron smoke         |
+| `npm run coverage`           | 覆盖率（阈值 60%）                     |
+| `npm run ui:shots`           | 原型 9 状态截图 → `artifacts/ui/`      |
+| `npm run smoke:electron`     | 打包前 Electron 冒烟                   |
+| `npm run electron:build:win` | Windows NSIS 安装包                    |
+| `npm run electron:build:mac` | macOS ARM64 DMG/ZIP（需在 macOS 构建） |
 
-# Electron 启动冒烟测试
-npm run smoke:electron
+## 文档
 
-# 构建 Windows 安装包
-npm run electron:build
-```
+- [AGENTS.md](./AGENTS.md) — AI 开发上下文与硬约束
+- [CONTRIBUTING.md](./CONTRIBUTING.md) — 分支、提交、DoD
+- [SECURITY.md](./SECURITY.md) — 安全基线、报告方式、已知限制
+- [docs/ROADMAP.md](./docs/ROADMAP.md) — 里程碑与任务
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — 进程模型、数据流、样式/测试架构
+- [docs/UI_DESIGN.md](./docs/UI_DESIGN.md) — 设计令牌、布局、组件与迁移计划
+- [docs/TESTING.md](./docs/TESTING.md) — 测试分层与规则
+- [docs/RELEASE.md](./docs/RELEASE.md) — 构建与发布 runbook
+- [docs/BASELINE.md](./docs/BASELINE.md) — 版本冻结记录
+- [CHANGELOG.md](./CHANGELOG.md)
 
-Windows 安装包生成在本地 `release` 目录中，该目录不会提交到 Git 仓库。
+## 打包与分发
 
-## macOS 版本
+- Windows x64：NSIS 安装包，未签名（SmartScreen 提示属预期）。
+- macOS ARM64：ad-hoc 签名、未公证；首次打开需在「隐私与安全性」中确认。DMG 必须由 macOS 生成。
+- 不启用自动更新；对外分发附 SHA256 与安装说明。
 
-当前提供 Apple Silicon（M1/M2/M3/M4）ARM64 构建配置，并使用免费的 macOS ad-hoc 技术签名。它不是付费 Apple Developer ID 签名，因此首次打开仍需要在“隐私与安全性”中确认。DMG 需要在 macOS 环境中生成：
+## 许可
 
-```bash
-npm ci
-npm run check
-npm run electron:build:mac
-npm run smoke:packaged
-```
-
-生成的 DMG、ZIP、校验文件和安装说明位于本地 `release` 目录。安装说明见 [MACOS_INSTALL.txt](./MACOS_INSTALL.txt)，远端 Mac 的构建与检查步骤见 [MACOS_TESTING.md](./MACOS_TESTING.md)。
-
-## 开源许可
-
-本项目采用 [MIT License](./LICENSE) 开源。你可以在保留版权声明和许可声明的前提下使用、复制、修改和分发本软件。
+上游部分采用 [MIT License](./LICENSE)。新增修改按私有/保留所有权利处理，详见 [NOTICE.md](./NOTICE.md) 与 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。

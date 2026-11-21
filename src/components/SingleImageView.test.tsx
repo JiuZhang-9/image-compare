@@ -2,7 +2,7 @@
 
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { LocalImage } from "../types";
+import type { LocalImage } from "@/types";
 import SingleImageView from "./SingleImageView";
 
 const image: LocalImage = {
@@ -58,9 +58,7 @@ describe("SingleImageView", () => {
     );
 
     expect(
-      screen
-        .getByRole("img", { name: image.name })
-        .classList.contains("is-quarter-turn"),
+      screen.getByRole("img", { name: image.name }).classList.contains("is-quarter-turn"),
     ).toBe(true);
   });
 

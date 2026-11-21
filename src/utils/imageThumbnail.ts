@@ -92,10 +92,7 @@ export class AsyncTaskQueue {
   }
 
   private startPendingTasks() {
-    while (
-      this.activeTasks < this.concurrency &&
-      this.pendingTasks.length > 0
-    ) {
+    while (this.activeTasks < this.concurrency && this.pendingTasks.length > 0) {
       const task = this.pendingTasks.shift();
 
       if (!task) {

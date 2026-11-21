@@ -16,20 +16,16 @@ describe("clampZoom", () => {
 
 describe("zoomAtPoint", () => {
   it("keeps the image point below the pointer stationary", () => {
-    expect(
-      zoomAtPoint(
-        { zoom: 100, x: 10, y: -20, rotation: 90 },
-        200,
-        50,
-        30,
-      ),
-    ).toEqual({ zoom: 200, x: -30, y: -70, rotation: 90 });
+    expect(zoomAtPoint({ zoom: 100, x: 10, y: -20, rotation: 90 }, 200, 50, 30)).toEqual({
+      zoom: 200,
+      x: -30,
+      y: -70,
+      rotation: 90,
+    });
   });
 
   it("preserves object identity when zoom does not change", () => {
-    expect(zoomAtPoint(DEFAULT_TRANSFORM, 100, 20, 30)).toBe(
-      DEFAULT_TRANSFORM,
-    );
+    expect(zoomAtPoint(DEFAULT_TRANSFORM, 100, 20, 30)).toBe(DEFAULT_TRANSFORM);
   });
 });
 

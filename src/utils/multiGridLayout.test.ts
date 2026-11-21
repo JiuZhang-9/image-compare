@@ -24,9 +24,7 @@ describe("multi-image grid layout", () => {
     expect(getMultiGridCardBasis(3)).toBe(
       "min(100%, max(220px, calc(33.333333% - 1.333333px)))",
     );
-    expect(getMultiGridCardBasis(2)).toBe(
-      "min(100%, max(220px, calc(50% - 1px)))",
-    );
+    expect(getMultiGridCardBasis(2)).toBe("min(100%, max(220px, calc(50% - 1px)))");
   });
 
   it("reduces the column count when the viewer becomes narrow", () => {
@@ -36,11 +34,7 @@ describe("multi-image grid layout", () => {
   });
 
   it("allocates the full available height between rows", () => {
-    expect(getMultiGridCardHeight(1)).toBe(
-      "min(100%, max(180px, calc(100% - 0px)))",
-    );
-    expect(getMultiGridCardHeight(2)).toBe(
-      "min(100%, max(180px, calc(50% - 1px)))",
-    );
+    expect(getMultiGridCardHeight(1)).toBe("min(100%, max(180px, calc(100% - 0px)))");
+    expect(getMultiGridCardHeight(2)).toBe("min(100%, max(180px, calc(50% - 1px)))");
   });
 });

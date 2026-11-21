@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { I18nContext, type I18nContextValue } from "./i18nContext";
 
 export type Language = "zh" | "en";
@@ -116,8 +110,7 @@ const translations = {
     gridShortcutResetOne: "Alt + 双击：复位单图",
     gridShortcutResetAll: "双击：复位全部",
     // 中文
-    multiCompareUsageHint:
-      "两张图片请使用“A/B 对比”，三张及以上图片可使用多图同步对比。",
+    multiCompareUsageHint: "两张图片请使用“A/B 对比”，三张及以上图片可使用多图同步对比。",
     multiImageSyncCompare: "多图同步对比",
     images: "张图片",
     zoomOutAllImages: "所有图片同步缩小",
@@ -163,26 +156,32 @@ const translations = {
     aboutFeedback: "反馈交流",
     aboutSupport: "支持开发",
     closeAbout: "关闭关于窗口",
-    aboutDescription: "一款轻量、专注的本地图片查看与对比工具，帮助你快速观察图片差异并校准细节。",
+    aboutDescription:
+      "一款轻量、专注的本地图片查看与对比工具，帮助你快速观察图片差异并校准细节。",
     aboutFeatures: "主要功能",
     aboutFeatureSingle: "单图查看：缩放、拖动、旋转与文件浏览",
     aboutFeatureCompare: "A/B 对比与多图同步观察",
     aboutFeatureLocal: "本地处理，图片不会上传到网络",
     aboutRoadmap: "后续方向",
-    aboutRoadmapText: "计划逐步加入裁剪、标注、敏感区域遮挡等实用能力，具体安排会根据实际反馈持续调整。",
+    aboutRoadmapText:
+      "计划逐步加入裁剪、标注、敏感区域遮挡等实用能力，具体安排会根据实际反馈持续调整。",
     aboutLicense: "开源许可",
-    aboutFeedbackIntro: "欢迎反馈问题、分享使用场景，也欢迎提出功能建议。你的反馈会帮助我们判断后续优化的优先级。",
+    aboutFeedbackIntro:
+      "欢迎反馈问题、分享使用场景，也欢迎提出功能建议。你的反馈会帮助我们判断后续优化的优先级。",
     qqGroup: "QQ 交流群",
     qqGroupName: "软件小工具@交流群2",
     wechatGroup: "微信群",
     contactToBeConfigured: "联系方式待配置",
     qrToBeConfigured: "二维码待配置",
     copy: "复制",
-    aboutFeedbackNote: "反馈问题时，建议附上操作系统、软件版本和复现步骤，请勿上传包含隐私信息的图片。",
-    aboutSupportIntro: "软件会继续保持免费与开放。如果它为你的工作带来了便利，并且你愿意支持后续维护，可以自愿支持开发。",
+    aboutFeedbackNote:
+      "反馈问题时，建议附上操作系统、软件版本和复现步骤，请勿上传包含隐私信息的图片。",
+    aboutSupportIntro:
+      "软件会继续保持免费与开放。如果它为你的工作带来了便利，并且你愿意支持后续维护，可以自愿支持开发。",
     wechatPay: "微信支持",
     alipay: "支付宝支持",
-    aboutSupportNote: "支持完全自愿，不会影响任何功能的使用。资金将用于持续开发、测试、构建与发布。",
+    aboutSupportNote:
+      "支持完全自愿，不会影响任何功能的使用。资金将用于持续开发、测试、构建与发布。",
   },
 
   en: {
@@ -340,26 +339,32 @@ const translations = {
     aboutFeedback: "Feedback",
     aboutSupport: "Support development",
     closeAbout: "Close About window",
-    aboutDescription: "A lightweight local tool for viewing images, comparing differences, and checking visual details efficiently.",
+    aboutDescription:
+      "A lightweight local tool for viewing images, comparing differences, and checking visual details efficiently.",
     aboutFeatures: "Highlights",
     aboutFeatureSingle: "Single-image viewing with zoom, pan, rotation, and browsing",
     aboutFeatureCompare: "A/B comparison and synchronized multi-image viewing",
     aboutFeatureLocal: "Local processing; images are never uploaded",
     aboutRoadmap: "Roadmap",
-    aboutRoadmapText: "Planned directions include cropping, annotations, and sensitive-area masking, guided by real-world feedback.",
+    aboutRoadmapText:
+      "Planned directions include cropping, annotations, and sensitive-area masking, guided by real-world feedback.",
     aboutLicense: "License",
-    aboutFeedbackIntro: "Report issues, share use cases, or suggest improvements. Your feedback helps set the next priorities.",
+    aboutFeedbackIntro:
+      "Report issues, share use cases, or suggest improvements. Your feedback helps set the next priorities.",
     qqGroup: "QQ group",
     qqGroupName: "Software Tools @ Group 2",
     wechatGroup: "WeChat group",
     contactToBeConfigured: "Contact to be configured",
     qrToBeConfigured: "QR code to be configured",
     copy: "Copy",
-    aboutFeedbackNote: "For useful reports, include your OS, app version, and reproduction steps. Please do not share private images.",
-    aboutSupportIntro: "The app will remain free and open. If it has been useful to you, you may optionally support continued maintenance.",
+    aboutFeedbackNote:
+      "For useful reports, include your OS, app version, and reproduction steps. Please do not share private images.",
+    aboutSupportIntro:
+      "The app will remain free and open. If it has been useful to you, you may optionally support continued maintenance.",
     wechatPay: "WeChat Pay",
     alipay: "Alipay",
-    aboutSupportNote: "Support is entirely optional and never changes access to features. It helps cover ongoing development, testing, builds, and releases.",
+    aboutSupportNote:
+      "Support is entirely optional and never changes access to features. It helps cover ongoing development, testing, builds, and releases.",
   },
 } as const;
 

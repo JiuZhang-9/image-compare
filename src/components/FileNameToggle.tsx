@@ -1,5 +1,5 @@
 import { Eye, EyeOff } from "lucide-react";
-import { useI18n } from "../useI18n";
+import { useI18n } from "@/useI18n";
 
 type Props = {
   showFileNames: boolean;
@@ -8,9 +8,7 @@ type Props = {
 
 export default function FileNameToggle({ showFileNames, onToggle }: Props) {
   const { t } = useI18n();
-  const actionLabel = showFileNames
-    ? t("hideFileNames")
-    : t("showFileNames");
+  const actionLabel = showFileNames ? t("hideFileNames") : t("showFileNames");
 
   return (
     <button

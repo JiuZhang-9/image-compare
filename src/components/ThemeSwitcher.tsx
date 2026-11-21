@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, CloudSun, Moon, Sun } from "lucide-react";
-import { useI18n } from "../useI18n";
+import { useI18n } from "@/useI18n";
 
 type Theme = "dark" | "gray" | "light";
 
@@ -27,10 +27,7 @@ const themeOptions = [
   },
 ] as const;
 
-export default function ThemeSwitcher({
-  theme,
-  onThemeChange,
-}: ThemeSwitcherProps) {
+export default function ThemeSwitcher({ theme, onThemeChange }: ThemeSwitcherProps) {
   const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -42,10 +39,7 @@ export default function ThemeSwitcher({
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -85,19 +79,11 @@ export default function ThemeSwitcher({
 
         <span>{t(currentOption.labelKey)}</span>
 
-        <ChevronDown
-          size={16}
-          className={isOpen ? "is-open" : ""}
-          aria-hidden="true"
-        />
+        <ChevronDown size={16} className={isOpen ? "is-open" : ""} aria-hidden="true" />
       </button>
 
       {isOpen && (
-        <div
-          className="theme-dropdown-menu"
-          role="menu"
-          aria-label={t("themeSelection")}
-        >
+        <div className="theme-dropdown-menu" role="menu" aria-label={t("themeSelection")}>
           {themeOptions.map((option) => {
             const OptionIcon = option.icon;
             const isActive = option.value === theme;
@@ -106,9 +92,7 @@ export default function ThemeSwitcher({
               <button
                 key={option.value}
                 type="button"
-                className={`theme-dropdown-option ${
-                  isActive ? "is-active" : ""
-                }`}
+                className={`theme-dropdown-option ${isActive ? "is-active" : ""}`}
                 role="menuitemradio"
                 aria-checked={isActive}
                 onClick={() => handleSelect(option.value)}
@@ -118,11 +102,7 @@ export default function ThemeSwitcher({
                 <span>{t(option.labelKey)}</span>
 
                 {isActive && (
-                  <Check
-                    size={17}
-                    className="theme-dropdown-check"
-                    aria-hidden="true"
-                  />
+                  <Check size={17} className="theme-dropdown-check" aria-hidden="true" />
                 )}
               </button>
             );

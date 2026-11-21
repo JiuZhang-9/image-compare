@@ -2,7 +2,7 @@
 
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { I18nProvider } from "../i18n";
+import { I18nProvider } from "@/i18n";
 import StatusBar from "./StatusBar";
 
 describe("StatusBar responsive help", () => {
@@ -32,17 +32,13 @@ describe("StatusBar responsive help", () => {
 
     const helpRegion = screen.getByTitle(fullHelp);
 
-    expect(helpRegion.querySelector(".statusbar-help-full")?.textContent).toBe(
-      fullHelp,
+    expect(helpRegion.querySelector(".statusbar-help-full")?.textContent).toBe(fullHelp);
+    expect(helpRegion.querySelector(".statusbar-help-compact")?.textContent).toBe(
+      compactHelp,
     );
-    expect(
-      helpRegion.querySelector(".statusbar-help-compact")?.textContent,
-    ).toBe(compactHelp);
     expect(document.querySelector(".statusbar-meta-full")?.textContent).toBe(
       "Grid mode: supports synchronized transforms and individual calibration",
     );
-    expect(document.querySelector(".statusbar-meta-compact")?.textContent).toBe(
-      "Grid",
-    );
+    expect(document.querySelector(".statusbar-meta-compact")?.textContent).toBe("Grid");
   });
 });

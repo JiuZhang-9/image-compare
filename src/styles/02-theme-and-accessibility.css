@@ -1282,29 +1282,15 @@ textarea {
    全局键盘焦点
    ======================================== */
 
-:where(
-  button,
-  [role="button"],
-  a,
-  input,
-  select,
-  textarea,
-  [tabindex]
-):focus-visible {
+:where(button, [role="button"], a, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--theme-accent);
   outline-offset: 2px;
 }
 
 /* 鼠标点击时不额外显示焦点框 */
-:where(
-    button,
-    [role="button"],
-    a,
-    input,
-    select,
-    textarea,
-    [tabindex]
-  ):focus:not(:focus-visible) {
+:where(button, [role="button"], a, input, select, textarea, [tabindex]):focus:not(
+    :focus-visible
+  ) {
   outline: none;
 }
 

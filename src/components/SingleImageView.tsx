@@ -1,6 +1,6 @@
 import { memo } from "react";
-import type { LocalImage } from "../types";
-import { hasSameDisplayImage } from "../utils/imageDisplay";
+import type { LocalImage } from "@/types";
+import { hasSameDisplayImage } from "@/utils/imageDisplay";
 import FileNameOverlay from "./FileNameOverlay";
 
 type Props = {
@@ -24,9 +24,7 @@ function SingleImageView({
     <div className="single-view">
       <img
         className={
-          isQuarterTurn
-            ? "single-view-image is-quarter-turn"
-            : "single-view-image"
+          isQuarterTurn ? "single-view-image is-quarter-turn" : "single-view-image"
         }
         src={image.url}
         alt={image.name}

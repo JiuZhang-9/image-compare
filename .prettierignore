@@ -1,0 +1,13 @@
+node_modules
+dist-renderer
+release
+artifacts
+coverage
+package-lock.json
+LICENSE
+*.ico
+*.icns
+*.png
+*.jpg
+*.jpeg
+*.zip

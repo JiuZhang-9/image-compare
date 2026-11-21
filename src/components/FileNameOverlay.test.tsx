@@ -10,9 +10,7 @@ describe("FileNameOverlay", () => {
   it("separates the extension so it can remain visible", () => {
     render(<FileNameOverlay fileName="long.comparison.image.png" />);
 
-    expect(screen.getByText("long.comparison.image").className).toBe(
-      "file-name-stem",
-    );
+    expect(screen.getByText("long.comparison.image").className).toBe("file-name-stem");
     expect(screen.getByText(".png").className).toBe("file-name-extension");
   });
 

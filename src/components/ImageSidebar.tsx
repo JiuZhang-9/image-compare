@@ -1,10 +1,4 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type DragEvent,
-  type KeyboardEvent,
-} from "react";
+import { useEffect, useRef, useState, type DragEvent, type KeyboardEvent } from "react";
 import {
   Crosshair,
   GripVertical,
@@ -15,9 +9,9 @@ import {
   Undo2,
   X,
 } from "lucide-react";
-import type { LocalImage } from "../types";
-import { useI18n } from "../useI18n";
-import { getDragAutoScrollAmount } from "../utils/sidebarReorder";
+import type { LocalImage } from "@/types";
+import { useI18n } from "@/useI18n";
+import { getDragAutoScrollAmount } from "@/utils/sidebarReorder";
 
 type Props = {
   images: LocalImage[];
@@ -67,9 +61,7 @@ export default function ImageSidebar({
   const locateTimerRef = useRef<number | null>(null);
   const normalizedFilter = filterQuery.trim().toLocaleLowerCase();
   const visibleImages = normalizedFilter
-    ? images.filter((image) =>
-        image.name.toLocaleLowerCase().includes(normalizedFilter),
-      )
+    ? images.filter((image) => image.name.toLocaleLowerCase().includes(normalizedFilter))
     : images;
 
   useEffect(() => {
@@ -117,8 +109,7 @@ export default function ImageSidebar({
     }
 
     const insertionIndex = Math.min(images.length, Math.max(0, toIndex));
-    const finalIndex =
-      fromIndex < insertionIndex ? insertionIndex - 1 : insertionIndex;
+    const finalIndex = fromIndex < insertionIndex ? insertionIndex - 1 : insertionIndex;
     const image = images[fromIndex];
 
     onReorder(imageId, toIndex);
@@ -144,9 +135,7 @@ export default function ImageSidebar({
 
     if (selectedImageId) {
       const selectedItem = itemRefs.current.get(selectedImageId);
-      const selectedIndex = images.findIndex(
-        (image) => image.id === selectedImageId,
-      );
+      const selectedIndex = images.findIndex((image) => image.id === selectedImageId);
       const selectedImage = images[selectedIndex];
 
       if (typeof selectedItem?.scrollIntoView === "function") {
@@ -190,9 +179,7 @@ export default function ImageSidebar({
     }
 
     const bounds = event.currentTarget.getBoundingClientRect();
-    const edge = event.clientY < bounds.top + bounds.height / 2
-      ? "before"
-      : "after";
+    const edge = event.clientY < bounds.top + bounds.height / 2 ? "before" : "after";
 
     setDropTarget({
       imageId,
@@ -369,9 +356,7 @@ export default function ImageSidebar({
                   selectedImageId === image.id ? "selected" : "",
                   draggedImageId === image.id ? "is-dragging" : "",
                   locatedImageId === image.id ? "is-located" : "",
-                  dropTarget?.imageId === image.id
-                    ? `is-drop-${dropTarget.edge}`
-                    : "",
+                  dropTarget?.imageId === image.id ? `is-drop-${dropTarget.edge}` : "",
                 ]
                   .filter(Boolean)
                   .join(" ")}
@@ -386,9 +371,7 @@ export default function ImageSidebar({
                   aria-label={`${t("reorderImage")}: ${image.name}. ${t("reorderImageHint")}`}
                   onDragStart={(event) => handleDragStart(event, image.id)}
                   onDragEnd={clearDragState}
-                  onKeyDown={(event) =>
-                    handleReorderKeyDown(event, image.id, index)
-                  }
+                  onKeyDown={(event) => handleReorderKeyDown(event, image.id, index)}
                 >
                   <GripVertical size={15} />
                 </button>
@@ -409,8 +392,7 @@ export default function ImageSidebar({
                     onError={(event) => {
                       if (
                         image.thumbnailUrl &&
-                        event.currentTarget.getAttribute("src") ===
-                          image.thumbnailUrl
+                        event.currentTarget.getAttribute("src") === image.thumbnailUrl
                       ) {
                         event.currentTarget.src = image.url;
                         return;
@@ -433,9 +415,7 @@ export default function ImageSidebar({
                   <button
                     type="button"
                     className={
-                      isImageA
-                        ? "role-button role-a active"
-                        : "role-button role-a"
+                      isImageA ? "role-button role-a active" : "role-button role-a"
                     }
                     title={t("setAsImageA")}
                     aria-label={`${t("setAsImageA")}: ${image.name}`}
@@ -447,9 +427,7 @@ export default function ImageSidebar({
                   <button
                     type="button"
                     className={
-                      isImageB
-                        ? "role-button role-b active"
-                        : "role-button role-b"
+                      isImageB ? "role-button role-b active" : "role-button role-b"
                     }
                     title={t("setAsImageB")}
                     aria-label={`${t("setAsImageB")}: ${image.name}`}
